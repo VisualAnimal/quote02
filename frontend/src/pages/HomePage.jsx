@@ -25,8 +25,10 @@ const HomePage = () => {
     <div>
       <List>
         {products.map(product => (
-          <List.Item extra={`￥${product.price + product.profit} `}
-          description={product.description}>
+          <List.Item extra={
+            <del>{`￥${product.price + product.profit} `}</del>
+          }
+            description={product.description}>
             {`${product.brand.name} `}
             {`${product.model.name} `}
             {`${product.capacity.name} `}

@@ -16,22 +16,25 @@ const Followed = () => {
   }, []);
   return (
     <div>
+      <h2>关注的商家</h2>
       <ul>
-        {follows.map(follow => (
-          <li key={follow.id}>
-            {`${follow.followedUser.name} - `}
-            {`发布的商品：${follow.followedUser._count.products}件 - `}
-            {`加价：${follow.profit} `}
+        {follows.length ? (
+          follows.map(follow => (
+            <li key={follow.id}>
+              {`${follow.followedUser.name} - `}
+              {`发布的商品：${follow.followedUser._count.products}件 - `}
+              {`加价：${follow.profit} `}
 
 
-            {/* {`${follow.model.name} `}
-            {`${follow.capacity.name} `}
-            {`${follow.color.name} `}
-            {`${follow.version.name} `}
-            {`￥${follow.price}`}
-            { } */}
-          </li>
-        ))}
+              {/* {`${follow.model.name} `}
+              {`${follow.capacity.name} `}
+              {`${follow.color.name} `}
+              {`${follow.version.name} `}
+              {`￥${follow.price}`}
+              { } */}
+            </li>
+          ))
+        ) : `没有关注的商家`}
       </ul>
     </div>
   )

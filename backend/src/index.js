@@ -11,6 +11,7 @@ const colorRouter = require('./routes/colorRoutes');
 const versionRouter = require('./routes/versionRoutes');
 const tagCategoryRouter = require('./routes/tagCategory');
 const tagRouter = require('./routes/tagRoutes');
+const attributeRouter = require('./routes/attributeRoutes');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/colors', colorRouter)
 app.use('/versions', versionRouter)
 app.use('/tagCategories', tagCategoryRouter)
 app.use('/tags', tagRouter)
+app.use('/attributes',attributeRouter)
 
 app.use(errorHandler)
 

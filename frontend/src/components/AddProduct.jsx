@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const AddProduct = () => {
+const AddProduct = ({setAddProduct, addProduct}) => {
   const { userId } = useParams()
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
@@ -56,10 +56,9 @@ const AddProduct = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/tagCategories`)
       .then(response => setTagCategories(response.data))
       .catch(error => console.error(error));
-  })
+  }, [])
 
   const handleSubmit = async (event) => {
-    // event.preventDefault();
     const newProduct = {
       brandId: parseInt(selectedBrand),
       modelId: parseInt(selectedModel),
@@ -84,6 +83,7 @@ const AddProduct = () => {
         navigate(`/user-dashboard/${userId}`)
       })
       .catch(error => console.error(error));
+    setAddProduct(addProduct+1)
   };
 
   const handleTagClick = (tagName) => {
@@ -93,7 +93,7 @@ const AddProduct = () => {
   return (
     <div>
       <h2>添加商品</h2>
-      <div>
+      <>
         <label>品牌:</label>
         <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
           <option value="">选择</option>
@@ -101,8 +101,8 @@ const AddProduct = () => {
             <option key={brand.id} value={brand.id}>{brand.name}</option>
           ))}
         </select>
-      </div>
-      <div>
+      </>
+      <>
         <label>型号:</label>
         <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
           <option value="">选择</option>
@@ -110,8 +110,8 @@ const AddProduct = () => {
             <option key={model.id} value={model.id}>{model.name}</option>
           ))}
         </select>
-      </div>
-      <div>
+      </>
+      <>
         <label>容量:</label>
         <select value={selectedCapacity} onChange={(e) => setSelectedCapacity(e.target.value)}>
           <option value="">选择</option>
@@ -119,8 +119,8 @@ const AddProduct = () => {
             <option key={capacity.id} value={capacity.id}>{capacity.name}</option>
           ))}
         </select>
-      </div>
-      <div>
+      </>
+      <>
         <label>颜色:</label>
         <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}>
           <option value="">选择</option>
@@ -128,8 +128,8 @@ const AddProduct = () => {
             <option key={color.id} value={color.id}>{color.name}</option>
           ))}
         </select>
-      </div>
-      <div>
+      </>
+      <>
         <label>版本:</label>
         <select value={selectedVersion} onChange={(e) => setSelectedVersion(e.target.value)}>
           <option value="">选择</option>
@@ -137,15 +137,15 @@ const AddProduct = () => {
             <option key={version.id} value={version.id}>{version.name}</option>
           ))}
         </select>
-      </div>
-      <div>
+      </>
+      <>
         <label>价格:</label>
         <input
           style={{ width: '60px' }}
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
-      </div>
+      </>
       <div>
         <label>商品描述：</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)} style={{ width: "100%", height: "60px" }} type="text" />

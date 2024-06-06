@@ -57,8 +57,24 @@ const deleteProduct = async (req, res, next) => {
 
 const getProductsByUserId = async (req, res, next) => {
   try {
+    const userId = parseInt(req.params.userId)
+    console.log(req.query)
+    const brandId = req.query.brandId ? parseInt(req.query.brandId) : null;
+    const modelId = req.query.modelId ? parseInt(req.query.modelId) : null
+    const whereClause = {
+      userId
+    }
+
+    if (brandId !== null) {
+      whereClause.brandId = brandId;
+    }
+
+    if (modelId !== null) {
+      whereClause.modelId = modelId;
+    }
+
     const products = await prisma.product.findMany({
-      where: { userId: parseInt(req.params.userId) },
+      where: whereClause,
       orderBy: { updatedAt: 'desc' },
       include: {
         brand: true,

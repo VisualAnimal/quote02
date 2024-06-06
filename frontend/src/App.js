@@ -4,10 +4,9 @@ import HomePage from './pages/HomePage';
 import UserDashboard from './pages/UserDashboard';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
-import Products from './pages/Products';
 import Preview from './pages/Preview'
 import Followed from './pages/Followed'
-import AddProduct from './pages/AddProduct'
+import Product from './pages/Product';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
       {
         // path: "products",
         index: true,
-        element: <Products />,
+        element: <Product />,
       },
       {
         path: "preview",
@@ -38,10 +37,6 @@ const router = createBrowserRouter([
       {
         path: "followed",
         element: <Followed />,
-      },
-      {
-        path: "addProduct",
-        element: <AddProduct />,
       },
     ],
   },
