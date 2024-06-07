@@ -24,11 +24,16 @@ const Preview = () => {
             {`${product.capacity.name} `}
             {`${product.color.name} `}
             {`${product.version.name} `}
-            {`${product.price + product.profit} `}
-            <ul>
+            {`￥${product.price + product.profit} `}
+            {` - 拿货价${product.price} `}
+            {` - ${product.user.name} `}
+            {/* <ul>
               <li>来自：{`${product.user.name} `}</li>
               <li>同行价：{`${product.price} `}</li>
               <li>加价：{`${product.profit}`}</li>
+            </ul> */}
+            <ul>
+              <li>{product.description}</li>
             </ul>
           </li>
         ))}

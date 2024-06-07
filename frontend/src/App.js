@@ -3,10 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import UserDashboard from './pages/UserDashboard';
 import Profile from './pages/Profile';
-import Settings from './pages/Settings';
 import Preview from './pages/Preview'
-import Followed from './pages/Followed'
 import Product from './pages/Product';
+import User from './pages/User';
 
 const router = createBrowserRouter([
   {
@@ -35,8 +34,8 @@ const router = createBrowserRouter([
         element: <Preview />,
       },
       {
-        path: "followed",
-        element: <Followed />,
+        path: "user",
+        element: <User />,
       },
     ],
   },

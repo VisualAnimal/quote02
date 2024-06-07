@@ -12,7 +12,7 @@ function Navigation() {
         <li><Link to={`/user-dashboard/${userId}/profile`}>设置</Link></li>
         {/* <li><Link to={`/user-dashboard/${userId}/settings`}>Settings</Link></li> */}
         <li><Link to={`/user-dashboard/${userId}`}>商品管理</Link></li>
-        <li><Link to={`/user-dashboard/${userId}/followed`}>商家管理</Link></li>
+        <li><Link to={`/user-dashboard/${userId}/user`}>商家管理</Link></li>
         <li><Link to={`/user-dashboard/${userId}/preview`}>预览店铺</Link></li>
       </ul>
     </nav>
