@@ -67,7 +67,8 @@ const AddProduct = ({setAddProduct, addProduct}) => {
       versionId: parseInt(selectedVersion),
       userId: parseInt(userId),
       price: parseInt(price),
-      description
+      description,
+      updatedAt: new Date()
     };
 
     axios.post(`${process.env.REACT_APP_API_URL}/products`, newProduct)

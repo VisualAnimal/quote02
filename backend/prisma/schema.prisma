@@ -73,23 +73,24 @@ model Version {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  brand       Brand    @relation(fields: [brandId], references: [id])
-  brandId     Int
-  model       Model    @relation(fields: [modelId], references: [id])
-  modelId     Int
-  capacity    Capacity @relation(fields: [capacityId], references: [id])
-  capacityId  Int
-  color       Color    @relation(fields: [colorId], references: [id])
-  colorId     Int
-  version     Version  @relation(fields: [versionId], references: [id])
-  versionId   Int
-  price       Int
-  description String?
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime? @updatedAt
+  id               Int       @id @default(autoincrement())
+  brand            Brand     @relation(fields: [brandId], references: [id])
+  brandId          Int
+  model            Model     @relation(fields: [modelId], references: [id])
+  modelId          Int
+  capacity         Capacity  @relation(fields: [capacityId], references: [id])
+  capacityId       Int
+  color            Color     @relation(fields: [colorId], references: [id])
+  colorId          Int
+  version          Version   @relation(fields: [versionId], references: [id])
+  versionId        Int
+  price            Int
+  description      String?
+  user             User      @relation(fields: [userId], references: [id])
+  userId           Int
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime? 
+  deactivationTime DateTime?
 }
 
 model Tag {

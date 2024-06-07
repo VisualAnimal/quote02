@@ -25,16 +25,27 @@ const HomePage = () => {
     <div>
       <List>
         {products.map(product => (
-          <List.Item extra={
-            <del>{`￥${product.price + product.profit} `}</del>
-          }
-            description={product.description}>
-            {`${product.brand.name} `}
-            {`${product.model.name} `}
-            {`${product.capacity.name} `}
-            {`${product.color.name} `}
-            {`${product.version.name} `}
-          </List.Item>
+          product.deactivationTime ? (
+            <List.Item extra={
+              <del>{`￥${product.price + product.profit} `}</del>
+            }
+              description={product.description}>
+              {`${product.brand.name} `}
+              {`${product.model.name} `}
+              {`${product.capacity.name} `}
+              {`${product.color.name} `}
+              {`${product.version.name} `}
+            </List.Item>
+          ) : (
+            <List.Item extra={`￥${product.price + product.profit} `}
+              description={product.description}>
+              {`${product.brand.name} `}
+              {`${product.model.name} `}
+              {`${product.capacity.name} `}
+              {`${product.color.name} `}
+              {`${product.version.name} `}
+            </List.Item>
+          )
         ))}
       </List>
     </div>

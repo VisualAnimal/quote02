@@ -45,14 +45,22 @@ const ProductList = ({ addProduct }) => {
         productsRef.current();
     }, [selectedBrand, selectedModel, addProduct]);
 
-    const handleDelete = (productId) => {
-        axios.delete(`${process.env.REACT_APP_API_URL}/products/${productId}`)
+    const handleDeactivation = (productId) => {
+        const deactivationTime = new Date()
+        axios.put(`${process.env.REACT_APP_API_URL}/products/${productId}`, { deactivationTime })
             .then(response => {
                 console.log('Product deleted:', response.data);
-                productsRef.current(); // 删除成功后重新获取产品列表
+                productsRef.current(); // 下架成功后重新获取产品列表
             })
             .catch(error => console.error('Error deleting product:', error));
     };
+
+    const handleActivation = productId => {
+        axios.put(`${process.env.REACT_APP_API_URL}/products/${productId}`, { deactivationTime: null })
+            .then(response => {
+                productsRef.current()
+            })
+    }
 
     const handleRefresh = (productId) => {
         axios.put(`${process.env.REACT_APP_API_URL}/products/${productId}/refresh`)
@@ -73,23 +81,38 @@ const ProductList = ({ addProduct }) => {
             <ul>
                 {products.length ? (
                     products.map(product => (
-                        <li key={product.id}>
-                            {`${product.brand.name} `}
-                            {`${product.model.name} `}
-                            {`${product.capacity.name} `}
-                            {`${product.color.name} `}
-                            {`${product.version.name} `}
-                            {`￥${product.price}`}
-                            <button onClick={() => handleDelete(product.id)}>删除</button>
-                            <button onClick={() => handleRefresh(product.id)}>擦亮</button>
-                            <ul>
-                                <li>{product.description}</li>
-                            </ul>
-                        </li>
+                        product.deactivationTime ? (
+                            <del key={product.id}>
+                                <li>
+                                    {`${product.brand.name} `}
+                                    {`${product.model.name} `}
+                                    {`${product.capacity.name} `}
+                                    {`${product.color.name} `}
+                                    {`${product.version.name} `}
+                                    {`￥${product.price}`}
+                                    <button onClick={() => handleActivation(product.id)}>重新上架</button>
+                                </li>
+                            </del>
+
+                        ) : (
+                            <li key={product.id}>
+                                {`${product.brand.name} `}
+                                {`${product.model.name} `}
+                                {`${product.capacity.name} `}
+                                {`${product.color.name} `}
+                                {`${product.version.name} `}
+                                {`￥${product.price}`}
+                                <button onClick={() => handleDeactivation(product.id)}>下架</button>
+                                <button onClick={() => handleRefresh(product.id)}>擦亮</button>
+                                <ul>
+                                    <li>{product.description}</li>
+                                </ul>
+                            </li>
+                        )
                     ))
                 ) : `没有商品`}
             </ul>
-        </div>
+        </div >
     );
 }
 
