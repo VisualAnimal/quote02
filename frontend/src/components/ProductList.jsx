@@ -91,6 +91,9 @@ const ProductList = ({ addProduct }) => {
                                     {`${product.version.name} `}
                                     {`￥${product.price}`}
                                     <button onClick={() => handleActivation(product.id)}>重新上架</button>
+                                    <ul>
+                                        <li>{product.description}</li>
+                                    </ul>
                                 </li>
                             </del>
 
