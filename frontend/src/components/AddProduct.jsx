@@ -81,7 +81,7 @@ const AddProduct = ({setAddProduct, addProduct}) => {
         setSelectedColor('');
         setSelectedVersion('');
         setPrice('');
-        navigate(`/user-dashboard/${userId}`)
+        setDescription('')
       })
       .catch(error => console.error(error));
     setAddProduct(addProduct+1)
