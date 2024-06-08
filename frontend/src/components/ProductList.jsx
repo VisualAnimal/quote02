@@ -13,7 +13,6 @@ const ProductList = ({ addProduct }) => {
 
     const handleBrandSelected = (e) => {
         setSelectedBrand(e)
-        console.log(e)
     }
 
     const handleModelSelected = e => {
@@ -35,7 +34,6 @@ const ProductList = ({ addProduct }) => {
                 if (params.length > 0) {
                     url += `?${params.join('&')}`;
                 }
-                console.log(url)
                 const response = await axios.get(url);
                 setProducts(response.data);
             } catch (error) {

@@ -58,7 +58,6 @@ const deleteProduct = async (req, res, next) => {
 const getProductsByUserId = async (req, res, next) => {
   try {
     const userId = parseInt(req.params.userId)
-    console.log(req.query)
     const brandId = req.query.brandId ? parseInt(req.query.brandId) : null;
     const modelId = req.query.modelId ? parseInt(req.query.modelId) : null
     const whereClause = {
@@ -102,8 +101,6 @@ const getProductsByFollowedUser = async (req, res, next) => {
       }
     });
 
-    console.log(followedUsers);
-
     const followedUserIds = followedUsers.map(follow => follow.followedUserId);
 
     if (followedUserIds.length === 0) {
@@ -111,12 +108,24 @@ const getProductsByFollowedUser = async (req, res, next) => {
     }
 
     // 查找关注的用户发布的产品
+    const brandId = req.query.brandId ? parseInt(req.query.brandId) : null
+    const modelId = req.query.modelId ? parseInt(req.query.modelId) : null
+    const whereClause = {
+      userId: {
+        in: followedUserIds
+      }
+    }
+
+    if (brandId !== null) {
+      whereClause.brandId = brandId;
+    }
+
+    if (modelId !== null) {
+      whereClause.modelId = modelId;
+    }
+    console.log(whereClause)
     const products = await prisma.product.findMany({
-      where: {
-        userId: {
-          in: followedUserIds
-        }
-      },
+      where: whereClause,
       orderBy: { updatedAt: 'desc' },
       include: {
         brand: true,
