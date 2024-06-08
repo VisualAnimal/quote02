@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const AddProduct = ({setAddProduct, addProduct}) => {
+const AddProduct = ({ setAddProduct, addProduct }) => {
   const { userId } = useParams()
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
@@ -17,7 +17,6 @@ const AddProduct = ({setAddProduct, addProduct}) => {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [tagCategories, setTagCategories] = useState([]);
-  const navigate = useNavigate()
 
   useEffect(() => {
     // 获取品牌列表
@@ -82,9 +81,9 @@ const AddProduct = ({setAddProduct, addProduct}) => {
         setSelectedVersion('');
         setPrice('');
         setDescription('')
+        setAddProduct(addProduct + 1)
       })
       .catch(error => console.error(error));
-    setAddProduct(addProduct+1)
   };
 
   const handleTagClick = (tagName) => {
