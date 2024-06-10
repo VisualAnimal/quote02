@@ -6,6 +6,7 @@ import Profile from './pages/Profile';
 import Preview from './pages/Preview'
 import Product from './pages/Product';
 import User from './pages/User';
+import Admin from './pages/Admin';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         element: <User />,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
   },
 ]);
 
