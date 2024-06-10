@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const Attribute = ({ brandSelected, modelSelected }) => {
+const Attribute = ({ brandSelected, modelSelected,capacitySelected }) => {
     const [attributes, setAttributes] = useState([])
     const [brand, setBrand] = useState(0)
     const [model, setModel] = useState(0)
+    const [capacity, setCapacity] = useState(0)
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/attributes`).then(response => {
@@ -14,7 +15,9 @@ const Attribute = ({ brandSelected, modelSelected }) => {
 
     const handleBrandChange = (e) => {
         setBrand(e.target.value)
+        setModel('')
         brandSelected(e.target.value)
+        modelSelected('')
     }
 
     const handleModelChange = (e) => {
@@ -22,18 +25,25 @@ const Attribute = ({ brandSelected, modelSelected }) => {
         modelSelected(e.target.value)
     }
 
+    const handleCapacityChange = (e) => {
+        setCapacity(e.target.value)
+        capacitySelected(e.target.value)
+    }
+
     const handleReset = () => {
         setBrand(0)
         brandSelected(0)
         setModel(0)
         modelSelected(0)
+        setCapacity(0)
+        capacitySelected(0)
     }
 
     return (
         <div>
-            <span>筛选：</span>
+            <span>品牌：</span>
             <select id="brand-select" value={brand} onChange={handleBrandChange}>
-                <option value="">品牌</option>
+                <option value="">不限</option>
                 {attributes.map(attribute => (
                     <option key={attribute.id} value={attribute.id}>
                         {attribute.name}
@@ -41,18 +51,39 @@ const Attribute = ({ brandSelected, modelSelected }) => {
                 ))}
             </select>
             {brand ? (
-                <select value={model} onChange={handleModelChange}>
-                    <option value="">型号</option>
-                    {
-                        attributes[brand - 1].models.map(model => (
+                <>
+                    <span>型号：</span>
+                    <select value={model} onChange={handleModelChange}>
+                        <option value="">不限</option>
+                        {
+                            attributes[brand - 1].models.map(model => (
 
-                            <option key={model.id} value={model.id}>
-                                {model.name}
-                            </option>
-                        ))
-                    }
+                                <option key={model.id} value={model.id}>
+                                    {model.name}
+                                </option>
+                            ))
+                        }
+                    </select>
 
-                </select>
+                </>
+            ) : ''}
+            {model ? (
+                <>
+                    <span>容量：</span>
+                    <select value={capacity} onChange={handleCapacityChange}>
+                        <option value="">不限</option>
+                        {
+                            attributes[brand - 1].models[model-1].capacities.map(capacity => (
+
+                                <option key={capacity.id} value={capacity.id}>
+                                    {capacity.name}
+                                </option>
+                            ))
+                        }
+
+                    </select>
+
+                </>
             ) : ''}
             {brand ? (
                 <button onClick={handleReset}>重置筛选</button>

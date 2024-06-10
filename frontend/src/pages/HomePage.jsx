@@ -11,6 +11,7 @@ const HomePage = () => {
   const { userId } = useParams()
   const [selectedBrand, setSelectedBrand] = useState('')
   const [selectedModel, setSelectedModel] = useState('')
+  const [selectedCapacity, setSelectedCapacity] = useState('')
 
   const handleBrandSelected = (e) => {
     setSelectedBrand(e)
@@ -18,6 +19,10 @@ const HomePage = () => {
 
   const handleModelSelected = e => {
     setSelectedModel(e)
+  }
+
+  const handleCapacitySelected = e => {
+    setSelectedCapacity(e)
   }
 
   useEffect(() => {
@@ -32,6 +37,9 @@ const HomePage = () => {
         if (selectedModel) {
           params.push(`modelId=${selectedModel}`);
         }
+        if(selectedCapacity){
+          params.push(`capacityId=${selectedCapacity}`)
+        }
         if (params.length > 0) {
           url += `?${params.join('&')}`;
         }
@@ -42,12 +50,13 @@ const HomePage = () => {
       }
     }
     productsRef.current()
-  }, [selectedBrand, selectedModel])
+  }, [selectedBrand, selectedModel,selectedCapacity])
   return (
     <div>
       <Attribute
         brandSelected={handleBrandSelected}
         modelSelected={handleModelSelected}
+        capacitySelected={handleCapacitySelected}
       />
       <List>
         {products.length ? (

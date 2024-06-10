@@ -10,6 +10,7 @@ const ProductList = ({ addProduct }) => {
     const productsRef = useRef();
     const [selectedBrand, setSelectedBrand] = useState('')
     const [selectedModel, setSelectedModel] = useState('')
+    const [selectedCapacity, setSelectedCapacity] = useState('')
 
     const handleBrandSelected = (e) => {
         setSelectedBrand(e)
@@ -17,6 +18,10 @@ const ProductList = ({ addProduct }) => {
 
     const handleModelSelected = e => {
         setSelectedModel(e)
+    }
+
+    const handleCapacitySelected = e => {
+        setSelectedCapacity(e)
     }
 
     useEffect(() => {
@@ -31,9 +36,13 @@ const ProductList = ({ addProduct }) => {
                 if (selectedModel) {
                     params.push(`modelId=${selectedModel}`);
                 }
+                if (selectedCapacity) {
+                    params.push(`capacityId=${selectedCapacity}`)
+                }
                 if (params.length > 0) {
                     url += `?${params.join('&')}`;
                 }
+                console.log(url)
                 const response = await axios.get(url);
                 setProducts(response.data);
             } catch (error) {
@@ -41,7 +50,7 @@ const ProductList = ({ addProduct }) => {
             }
         };
         productsRef.current();
-    }, [selectedBrand, selectedModel, addProduct]);
+    }, [selectedBrand, selectedModel, selectedCapacity, addProduct]);
 
     const handleDeactivation = (productId) => {
         const deactivationTime = new Date()
@@ -75,6 +84,7 @@ const ProductList = ({ addProduct }) => {
             <Attribute
                 brandSelected={handleBrandSelected}
                 modelSelected={handleModelSelected}
+                capacitySelected={handleCapacitySelected}
             />
             <ul>
                 {products.length ? (

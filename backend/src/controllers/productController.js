@@ -60,6 +60,8 @@ const getProductsByUserId = async (req, res, next) => {
     const userId = parseInt(req.params.userId)
     const brandId = req.query.brandId ? parseInt(req.query.brandId) : null;
     const modelId = req.query.modelId ? parseInt(req.query.modelId) : null
+    const capacityId = req.query.capacityId ? parseInt(req.query.capacityId) : null
+
     const whereClause = {
       userId
     }
@@ -70,6 +72,10 @@ const getProductsByUserId = async (req, res, next) => {
 
     if (modelId !== null) {
       whereClause.modelId = modelId;
+    }
+
+    if (capacityId !== null) {
+      whereClause.capacityId = capacityId;
     }
 
     const products = await prisma.product.findMany({
@@ -110,6 +116,7 @@ const getProductsByFollowedUser = async (req, res, next) => {
     // 查找关注的用户发布的产品
     const brandId = req.query.brandId ? parseInt(req.query.brandId) : null
     const modelId = req.query.modelId ? parseInt(req.query.modelId) : null
+    const capacityId = req.query.capacityId ? parseInt(req.query.capacityId) : null
     const whereClause = {
       userId: {
         in: followedUserIds
@@ -122,6 +129,9 @@ const getProductsByFollowedUser = async (req, res, next) => {
 
     if (modelId !== null) {
       whereClause.modelId = modelId;
+    }
+    if (capacityId !== null) {
+      whereClause.capacityId = capacityId
     }
     console.log(whereClause)
     const products = await prisma.product.findMany({
