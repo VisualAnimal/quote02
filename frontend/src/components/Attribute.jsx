@@ -16,13 +16,18 @@ const Attribute = ({ brandSelected, modelSelected,capacitySelected }) => {
     const handleBrandChange = (e) => {
         setBrand(e.target.value)
         setModel('')
+        setCapacity('')
         brandSelected(e.target.value)
         modelSelected('')
+        capacitySelected('')
     }
 
     const handleModelChange = (e) => {
         setModel(e.target.value)
         modelSelected(e.target.value)
+        setCapacity('')
+        capacitySelected('')
+
     }
 
     const handleCapacityChange = (e) => {
