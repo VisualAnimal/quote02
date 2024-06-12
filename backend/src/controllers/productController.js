@@ -145,7 +145,7 @@ const getProductsByFollowedUser = async (req, res, next) => {
     if (capacityId !== null) {
       whereClause.capacityId = capacityId
     }
-    console.log(whereClause)
+    // console.log(whereClause)
     const products = await prisma.product.findMany({
       where: whereClause,
       orderBy: { updatedAt: 'desc' },

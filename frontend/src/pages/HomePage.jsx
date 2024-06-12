@@ -37,7 +37,7 @@ const HomePage = () => {
         if (selectedModel) {
           params.push(`modelId=${selectedModel}`);
         }
-        if(selectedCapacity){
+        if (selectedCapacity) {
           params.push(`capacityId=${selectedCapacity}`)
         }
         if (params.length > 0) {
@@ -50,13 +50,16 @@ const HomePage = () => {
       }
     }
     productsRef.current()
-  }, [selectedBrand, selectedModel,selectedCapacity])
+  }, [selectedBrand, selectedModel, selectedCapacity])
+
+
   return (
     <div>
       <Attribute
         brandSelected={handleBrandSelected}
         modelSelected={handleModelSelected}
         capacitySelected={handleCapacitySelected}
+        userId={userId}
       />
       <List>
         {products.length ? (
