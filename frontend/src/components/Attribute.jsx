@@ -1,29 +1,20 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const Attribute = ({ brandSelected, modelSelected, capacitySelected, userId }) => {
-    // console.log(userId)
+const Attribute = ({ brandSelected, modelSelected, capacitySelected, ids }) => {
+    // console.log(ids)
     const [attributes, setAttributes] = useState([])
     const [brand, setBrand] = useState(0)
     const [model, setModel] = useState(0)
     const [capacity, setCapacity] = useState(0)
-    const [followedUserIds, setFollowedUserIds] = useState([])
+    
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/follows/${userId}`).then(response => {
-            const followedUserIds = response.data.map(follow => follow.followedUserId)
-            console.log(followedUserIds)
-            setFollowedUserIds(followedUserIds)
-
-        })
-    }, [])
-
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/attributes`, { params: { ids: followedUserIds } }).then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/attributes`, { params: { ids } }).then(response => {
             setAttributes(response.data)
             // console.log(response.data)
         })
-    }, [followedUserIds])
+    }, [])
 
     const handleBrandChange = (e) => {
         setBrand(e.target.value)

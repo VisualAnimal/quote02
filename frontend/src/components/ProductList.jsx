@@ -85,6 +85,7 @@ const ProductList = ({ addProduct }) => {
                 brandSelected={handleBrandSelected}
                 modelSelected={handleModelSelected}
                 capacitySelected={handleCapacitySelected}
+                ids={[parseInt(userId)]}
             />
             <ul>
                 {products.length ? (

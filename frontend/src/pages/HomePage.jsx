@@ -12,6 +12,7 @@ const HomePage = () => {
   const [selectedBrand, setSelectedBrand] = useState('')
   const [selectedModel, setSelectedModel] = useState('')
   const [selectedCapacity, setSelectedCapacity] = useState('')
+  const [followedUsers, setFollowedUsers] = useState([])
 
   const handleBrandSelected = (e) => {
     setSelectedBrand(e)
@@ -52,20 +53,30 @@ const HomePage = () => {
     productsRef.current()
   }, [selectedBrand, selectedModel, selectedCapacity])
 
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/follows/${userId}`).then(response => {
+      const followedUserIds = response.data.map(follow => follow.followedUserId)
+      // console.log(followedUserIds)
+      setFollowedUsers(followedUserIds)
+    })
+  }, [])
+
 
   return (
     <div>
-      <Attribute
-        brandSelected={handleBrandSelected}
-        modelSelected={handleModelSelected}
-        capacitySelected={handleCapacitySelected}
-        userId={userId}
-      />
+      {followedUsers.length > 0 ? (
+        <Attribute
+          brandSelected={handleBrandSelected}
+          modelSelected={handleModelSelected}
+          capacitySelected={handleCapacitySelected}
+          ids={followedUsers}
+        />
+      ) : (<div>加载中...</div>)}
       <List>
         {products.length ? (
           products.map(product => (
             product.deactivationTime ? (
-              <List.Item extra={
+              <List.Item key={product.id} extra={
                 <del>{`￥${product.price + product.profit} `}</del>
               }
                 description={product.description}>
@@ -76,7 +87,7 @@ const HomePage = () => {
                 {`${product.version.name} `}
               </List.Item>
             ) : (
-              <List.Item extra={`￥${product.price + product.profit} `}
+              <List.Item key={product.id} extra={`￥${product.price + product.profit} `}
                 description={product.description}>
                 {`${product.brand.name} `}
                 {`${product.model.name} `}
