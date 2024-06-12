@@ -62,6 +62,7 @@ model Color {
   model    Model     @relation(fields: [modelId], references: [id])
   modelId  Int
   products Product[]
+  image    String?
 }
 
 model Version {
@@ -89,7 +90,7 @@ model Product {
   user             User      @relation(fields: [userId], references: [id])
   userId           Int
   createdAt        DateTime  @default(now())
-  updatedAt        DateTime? 
+  updatedAt        DateTime?
   deactivationTime DateTime?
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { List } from 'antd-mobile'
+import { Image, List } from 'antd-mobile'
 import { ListItem } from 'antd-mobile/es/components/list/list-item';
 import Attribute from '../components/Attribute';
 
@@ -73,21 +73,43 @@ const HomePage = () => {
         />
       ) : (<div>加载中...</div>)}
       <List>
+
         {products.length ? (
           products.map(product => (
             product.deactivationTime ? (
               <List.Item key={product.id} extra={
                 <del>{`￥${product.price + product.profit} `}</del>
               }
+                prefix={
+                  <Image
+                    src={product.color.image}
+
+                    // style={{ borderRadius: 20 }}
+                    fit='contain'
+                    width={36}
+                    height={36}
+                  />
+                }
                 description={product.description}>
                 {`${product.brand.name} `}
                 {`${product.model.name} `}
                 {`${product.capacity.name} `}
                 {`${product.color.name} `}
+                {`${product.color.id} `}
                 {`${product.version.name} `}
               </List.Item>
             ) : (
               <List.Item key={product.id} extra={`￥${product.price + product.profit} `}
+                prefix={
+                  <Image
+                    src={product.color.image}
+
+                    // style={{ borderRadius: 20 }}
+                    fit='scale-down'
+                    width={36}
+                    height={36}
+                  />
+                }
                 description={product.description}>
                 {`${product.brand.name} `}
                 {`${product.model.name} `}
