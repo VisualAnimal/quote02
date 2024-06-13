@@ -9,7 +9,7 @@ const Attribute = () => {
     useEffect(() => {
         fetchAttributeRef.current = async () => {
             try {
-                const response = await axios.get(`${process.env.env.REACT_APP_API_URL}/attributes`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/attributes`);
                 setAttribute(response.data);
             } catch (error) {
                 setError('Failed to fetch attribute');
