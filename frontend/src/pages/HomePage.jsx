@@ -85,9 +85,9 @@ const HomePage = () => {
                     src={product.color.image}
 
                     // style={{ borderRadius: 20 }}
-                    fit='contain'
-                    width={43}
-                    height={43}
+                    fit='scale-down'
+                    width={62}
+                    height={62}
                   />
                 }
                 description={product.description}>
@@ -106,8 +106,8 @@ const HomePage = () => {
 
                     // style={{ borderRadius: 20 }}
                     fit='scale-down'
-                    width={43}
-                    height={43}
+                    width={62}
+                    height={62}
                   />
                 }
                 description={product.description}>
