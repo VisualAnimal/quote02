@@ -55,7 +55,7 @@ const Attribute = ({ brandSelected, modelSelected, capacitySelected, ids }) => {
                 {attributes.map(attribute => (
                     <option key={attribute.id} value={attribute.id}>
                         {attribute._count.products ? (
-                            `${attribute.name} - ${attribute._count.products}台`
+                            `${attribute.name}`
                         ) : (
                             `${attribute.name} - 缺货`
                         )}
@@ -72,7 +72,7 @@ const Attribute = ({ brandSelected, modelSelected, capacitySelected, ids }) => {
 
                                 <option key={model.id} value={model.id}>
                                     {model._count.products ? (
-                                        `${model.name} - ${model._count.products}台`
+                                        `${model.name}`
                                     ) : (
                                         `${model.name} - 缺货`
                                     )}
