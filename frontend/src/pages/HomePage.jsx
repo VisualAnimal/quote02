@@ -86,8 +86,8 @@ const HomePage = () => {
 
                     // style={{ borderRadius: 20 }}
                     fit='contain'
-                    width={36}
-                    height={36}
+                    width={43}
+                    height={43}
                   />
                 }
                 description={product.description}>
@@ -106,8 +106,8 @@ const HomePage = () => {
 
                     // style={{ borderRadius: 20 }}
                     fit='scale-down'
-                    width={36}
-                    height={36}
+                    width={43}
+                    height={43}
                   />
                 }
                 description={product.description}>
