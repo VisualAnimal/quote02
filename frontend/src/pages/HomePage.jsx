@@ -91,12 +91,13 @@ const HomePage = () => {
                   />
                 }
                 description={product.description}>
-                {`${product.brand.name} `}
-                {`${product.model.name} `}
-                {`${product.capacity.name} `}
-                {`${product.color.name} `}
-                {`${product.color.id} `}
-                {`${product.version.name} `}
+                <del>
+                  {`${product.brand.name} `}
+                  {`${product.model.name} `}
+                  {`${product.capacity.name} `}
+                  {`${product.color.name} `}
+                  {`${product.version.name} `}
+                </del>
               </List.Item>
             ) : (
               <List.Item key={product.id} extra={`￥${product.price + product.profit} `}
