@@ -79,19 +79,21 @@ const HomePage = () => {
             product.deactivationTime ? (
               <List.Item key={product.id} extra={
                 <>
-                  <del style={{color:"#e2e2e2"}}>{`￥${product.price + product.profit} `}</del>
+                  <del style={{ color: "#e2e2e2" }}>{`￥${product.price + product.profit} `}</del>
                 </>
               }
                 prefix={
-                  <Image
-                    src={product.color.image}
-                    fit='scale-down'
-                    width={62}
-                    height={62}
-                  />
+                  <div style={{opacity:"0.6"}}>
+                    <Image
+                      src={product.color.image}
+                      fit='scale-down'
+                      width={62}
+                      height={62}
+                    />
+                  </div>
                 }
-                description={<span style={{color:"#e2e2e2"}}>{product.description}</span>}>
-                <div style={{color:"#e2e2e2"}}>
+                description={<span style={{ color: "#e2e2e2" }}>{product.description}</span>}>
+                <div style={{ color: "#e2e2e2" }}>
                   {`${product.brand.name} `}
                   {`${product.model.name} `}
                   {`${product.capacity.name} `}
