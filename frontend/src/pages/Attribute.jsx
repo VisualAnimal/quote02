@@ -28,7 +28,7 @@ const Attribute = () => {
                 if (parentIdField) {
                     data[parentIdField] = parentId; // 使用传入的字段名设置相应的父级实体 ID
                 }
-                const response = await axios.post(`${process.env.env.REACT_APP_API_URL}/${entity}`, data);
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/${entity}`, data);
                 if (response.status === 201) {
                     fetchAttributeRef.current();
                 }
