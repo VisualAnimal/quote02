@@ -78,29 +78,30 @@ const HomePage = () => {
           products.map(product => (
             product.deactivationTime ? (
               <List.Item key={product.id} extra={
-                <del>{`￥${product.price + product.profit} `}</del>
+                <>
+                  <del style={{color:"#e2e2e2"}}>{`￥${product.price + product.profit} `}</del>
+                </>
               }
                 prefix={
                   <Image
                     src={product.color.image}
-
-                    // style={{ borderRadius: 20 }}
                     fit='scale-down'
                     width={62}
                     height={62}
                   />
                 }
-                description={product.description}>
-                <del>
+                description={<span style={{color:"#e2e2e2"}}>{product.description}</span>}>
+                <div style={{color:"#e2e2e2"}}>
                   {`${product.brand.name} `}
                   {`${product.model.name} `}
                   {`${product.capacity.name} `}
                   {`${product.color.name} `}
                   {`${product.version.name} `}
-                </del>
+                  {` - 已出售`}
+                </div>
               </List.Item>
             ) : (
-              <List.Item key={product.id} extra={`￥${product.price + product.profit} `}
+              <List.Item key={product.id} extra={`￥${product.price + product.profit}`}
                 prefix={
                   <Image
                     src={product.color.image}
