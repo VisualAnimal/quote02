@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Image, List } from 'antd-mobile'
-import { ListItem } from 'antd-mobile/es/components/list/list-item';
 import Attribute from '../components/Attribute';
 
 const HomePage = () => {
@@ -83,7 +82,7 @@ const HomePage = () => {
                 </>
               }
                 prefix={
-                  <div style={{opacity:"0.6"}}>
+                  <div style={{opacity:"0.3"}}>
                     <Image
                       src={product.color.image}
                       fit='scale-down'
