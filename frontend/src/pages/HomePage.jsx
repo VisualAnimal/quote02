@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Image, List } from 'antd-mobile'
+import { Image, InfiniteScroll, List } from 'antd-mobile'
 import Attribute from '../components/Attribute';
 
 const HomePage = () => {
@@ -12,6 +12,9 @@ const HomePage = () => {
   const [selectedModel, setSelectedModel] = useState('')
   const [selectedCapacity, setSelectedCapacity] = useState('')
   const [followedUsers, setFollowedUsers] = useState([])
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  const size = 20
 
   const handleBrandSelected = (e) => {
     setSelectedBrand(e)
@@ -25,11 +28,16 @@ const HomePage = () => {
     setSelectedCapacity(e)
   }
 
+  const handleLoadMore = e => {
+    setPage(prev => prev + 1)
+    // productsRef.current()
+  }
+
   useEffect(() => {
     productsRef.current = async () => {
       try {
         // 构建动态 URL
-        let url = `${process.env.REACT_APP_API_URL}/products/user/${userId}/followed`;
+        let url = `${process.env.REACT_APP_API_URL}/products/user/${userId}/followed?page=${page}&pageSize=${size}`;
         const params = [];
         if (selectedBrand) {
           params.push(`brandId=${selectedBrand}`);
@@ -44,13 +52,15 @@ const HomePage = () => {
           url += `?${params.join('&')}`;
         }
         const response = await axios.get(url);
-        setProducts(response.data);
+        setProducts(prev => [...prev, ...response.data]);
+        setHasMore(response.data.length > 0);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
     productsRef.current()
-  }, [selectedBrand, selectedModel, selectedCapacity])
+  }, [selectedBrand, selectedModel, selectedCapacity, page])
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/follows/${userId}`).then(response => {
@@ -82,7 +92,7 @@ const HomePage = () => {
                 </>
               }
                 prefix={
-                  <div style={{opacity:"0.3"}}>
+                  <div style={{ opacity: "0.3" }}>
                     <Image
                       src={product.color.image}
                       fit='scale-down'
@@ -126,6 +136,8 @@ const HomePage = () => {
           <span>没有商品</span>
         )}
       </List>
+      {/* <button onClick={handleLoadMore}>加载更多</button> */}
+      <InfiniteScroll hasMore={hasMore} loadMore={handleLoadMore} />
     </div>
   )
 }
