@@ -14,7 +14,7 @@ const HomePage = () => {
   const [followedUsers, setFollowedUsers] = useState([])
   const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
-  const size = 20
+  const size = 10
 
   const handleBrandSelected = (e) => {
     setSelectedBrand(e)
