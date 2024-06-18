@@ -109,6 +109,13 @@ const getProductsByUserId = async (req, res, next) => {
 };
 
 const getProductsByFollowedUser = async (req, res, next) => {
+  console.log(req.query.page)
+  const skip = (parseInt(req.query.page) - 1) * parseInt(req.query.pageSize);
+  const take = parseInt(req.query.pageSize);
+  console.log(skip)
+  console.log(take)
+  // const skip = (3 - 1) * 5;
+  // const take = 5;
   try {
     // 找到当前用户关注的用户的 ID 以及相关的 profit
     const followedUsers = await prisma.follow.findMany({
@@ -148,6 +155,8 @@ const getProductsByFollowedUser = async (req, res, next) => {
     // console.log(whereClause)
     const products = await prisma.product.findMany({
       where: whereClause,
+      skip: skip,
+      take: take,
       orderBy: { updatedAt: 'desc' },
       include: {
         brand: true,
