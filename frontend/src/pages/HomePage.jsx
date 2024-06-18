@@ -17,15 +17,23 @@ const HomePage = () => {
   const size = 10
 
   const handleBrandSelected = (e) => {
+    setPage(1)
+    setProducts([])
     setSelectedBrand(e)
   }
 
   const handleModelSelected = e => {
+    setPage(1)
+    setProducts([])
     setSelectedModel(e)
+
   }
 
   const handleCapacitySelected = e => {
+    setPage(1)
+    setProducts([])
     setSelectedCapacity(e)
+
   }
 
   const handleLoadMore = e => {
@@ -37,8 +45,15 @@ const HomePage = () => {
     productsRef.current = async () => {
       try {
         // 构建动态 URL
-        let url = `${process.env.REACT_APP_API_URL}/products/user/${userId}/followed?page=${page}&pageSize=${size}`;
+        let url = `${process.env.REACT_APP_API_URL}/products/user/${userId}/followed`;
         const params = [];
+        if (page) {
+          params.push(`page=${page}`)
+          console.log('page');
+        }
+        if (size) {
+          params.push(`pageSize=${size}`)
+        }
         if (selectedBrand) {
           params.push(`brandId=${selectedBrand}`);
         }
