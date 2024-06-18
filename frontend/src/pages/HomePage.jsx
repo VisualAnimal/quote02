@@ -13,7 +13,7 @@ const HomePage = () => {
   const [selectedCapacity, setSelectedCapacity] = useState('')
   const [followedUsers, setFollowedUsers] = useState([])
   const [page, setPage] = useState(1)
-  const [hasMore, setHasMore] = useState(true)
+  const [hasMore, setHasMore] = useState(false)
   const size = 10
 
   const handleBrandSelected = (e) => {
@@ -68,6 +68,7 @@ const HomePage = () => {
         }
         const response = await axios.get(url);
         setProducts(prev => [...prev, ...response.data]);
+        setHasMore(response.data.length)
         setHasMore(response.data.length > 0);
 
       } catch (error) {
